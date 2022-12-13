@@ -26,14 +26,18 @@ int main(int ac, char **av, char *envp[])
 		{
 			if (buf[input_len - 1] == '\n')
 				buf[input_len - 1] = '\0';
+			token = malloc(20);
 			token = strtok(buf, " ");
+			argv[0] = malloc(20);
 			argv[0] = _strcat("/bin/", token);
 			while (token != NULL)
 			{
 				token = strtok(buf, " ");
+				argv[i] = malloc(20);
 				argv[i] = token;
 				i++;
 			}
+			argv[i + 1] = malloc(20);
 			argv[i + 1] = NULL;
 			execve(argv[0], argv, NULL);
 			write(1, "\n", 1);
