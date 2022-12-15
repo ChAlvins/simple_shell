@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- *handle_signal- it keeps track is interactive mode
- *@m: the signal number
- *Return: nothing
+ * handle_signal - prints new line and prompt when CTRL + C is passed as input
+ * @signal: name of signal
  */
-
-void handle_signal(int m)
+void handle_signal(int signal)
 {
-	(void)m;
-	write(STDERR_FILENO, "\n", 1);
-	write(STDERR_FILENO, "($ash)", 2);
+	char *prompt = {"\n$$"}; /*print prompt on newline*/
+	(void) signal;
+
+	write(STDOUT_FILENO, prompt, _strlen(prompt));
+	fflush(stdout);
 }
