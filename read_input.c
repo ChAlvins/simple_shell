@@ -11,6 +11,7 @@ char *read_input(void)
 	size_t bufsize = 0;
 	int i;
 
+	/*get string that the user inputs and pass it to line variable*/
 	signal = getline(&line, &bufsize, stdin);
 	if (!line)
 	{
