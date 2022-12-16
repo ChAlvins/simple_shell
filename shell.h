@@ -1,62 +1,53 @@
-#ifndef SHELL_H
-#define SHELL_H
-
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
+#ifndef _SHELL_H_
+#define _SHELL_H_
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <time.h>
-#include <stdbool.h>
-
-/* environment variables */
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <dirent.h>
+#include <string.h>
+#include <fcntl.h>
+#define TOK_BUFSIZE 64
+#define TOK_DELIM " \t\r\n\a"
 extern char **environ;
-extern __sighandler_t signal(int __sig, __sighandler_t __handler);
 
-/* handle built ins */
-int checker(char **cmd, char *buf);
-void prompt_user(void);
-char* _strcat(char *dest, char *src);
-void handle_signal(int m);
-char **tokenizer(char *line);
-char *test_path(char **path, char *command);
-char *append_path(char *path, char *command);
-int handle_builtin(char **command, char *line);
-void exit_cmd(char **command, char *line);
+void handle_signal(int signal);
+int *_error(char *argv, int count, char *args);
 
-void print_env(void);
+int func_exit(char **args);
+void print_env(char **env);
 
-/* string handlers */
+char **_which(char *foundpath);
+char *_getenv(char *name, char **env);
+char *search_func(char **dir, char *cmd);
+int child_process(char **av, char **args, char **environ, int st, int countt);
+int _access(char *filename);
+
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+int _strlen(const char *s);
 int _strcmp(char *s1, char *s2);
-int _strlen(char *s);
-int _strncmp(char *s1, char *s2, int n);
-char *_strdup(char *s);
-char *_strchr(char *s, char c);
+char *_strstr(char *str1, char *str2);
+char *_strdup(char *str);
+char *_itoa(int num, int base);
 
-void execution(char *cp, char **cmd);
-char *find_path(void);
+char *read_input(void);
+char **sparse_str(char *line, char **env);
+int execute(char **args, char **argv, int count, char *line, char **env);
+void prompt_user(void);
 
-/* helper function for efficient free */
-void free_buffers(char **buf);
+void *_realloc(void *ptr, unsigned int new_size);
+int _count_point(char *buffer);
 
-struct builtin
-{
-	char *env;
-	char *exit;
-} builtin;
 
-struct info
-{
-	int final_exit;
-	int ln_count;
-} info;
 
-struct flags
-{
-	bool interactive;
-} flags;
+/*new*/
+void *_malloc(unsigned int nmemb, unsigned int size);
+char **search_path(char **environ);
+int _stat(char **cmd, char **path);
+char *str_concat(char *s1, char *s2);
+void _puts(char *str);
+int _putchar(char c);
 
-#endif /* SHELL_H */
+#endif
