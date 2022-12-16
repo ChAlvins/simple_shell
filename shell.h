@@ -40,9 +40,6 @@ void prompt_user(void);
 void *_realloc(void *ptr, unsigned int new_size);
 int _count_point(char *buffer);
 
-
-
-/*new*/
 void *_malloc(unsigned int nmemb, unsigned int size);
 char **search_path(char **environ);
 int _stat(char **cmd, char **path);
