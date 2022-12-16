@@ -1,8 +1,17 @@
 #include "shell.h"
+
 /**
- * prompt_user - prompts user for command, "($ash)" is printed on stdout
+ * prompt - prints '$$' and waits for a user input
  */
+
 void prompt_user(void)
 {
-	write(1, "($ash)", 6);
+	char *prompt = "$$";
+	char *buffer = getcwd(NULL, 0);
+
+	if (isatty(STDIN_FILENO))
+	{
+		write(STDOUT_FILENO, prompt, _strlen(prompt));
+	}
+	free(buffer);
 }
