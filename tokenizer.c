@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * sparse_str - divides a string into array of strings
  * @line: the string to be divided
@@ -38,7 +37,6 @@ char **sparse_str(char *line, char **env)
 		exit(0);
 	}
 	if ((_strcmp(tokens[0], "env") == 0) && tokens[1] == NULL)
-		print_env(env);      /*find enviroment*/
-
+		print_env(env);     /* find enviroment*/
 	return (tokens);
 }
