@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * main - creates a prompt reading input, sparses it, executes and waits
  * for another command unless told to exit
