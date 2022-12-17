@@ -1,4 +1,18 @@
 #include "shell.h"
+
+static volatile int keepRunning = 1;
+/**
+ * handle_signal - prints new line and prompt when CTRL + C is passed as input
+ * @signal: name of signal
+ */
+void handle_signal(int signal)
+{
+	char *prompt = {"\n(ash)$ "}; /*print prompt on newline*/
+	(void) signal;
+
+	write(STDOUT_FILENO, prompt, _strlen(prompt));
+	keepRunning = 0;
+	fflush(stdout);
 /**
  * main - creates a prompt reading input, sparses it, executes and waits
  * for another command unless told to exit
@@ -12,7 +26,6 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 	char *line = NULL;
 	char **args, **path;
 	int count = 0, status = 0;
-	static volatile int keepRunning = 1;
 	(void) av;
 	signal(SIGINT, handle_signal);
 	while (keepRunning)

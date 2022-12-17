@@ -10,5 +10,6 @@ void handle_signal(int signal)
 	(void) signal;
 
 	write(STDOUT_FILENO, prompt, _strlen(prompt));
+	keepRunning = 0;
 	fflush(stdout);
 }
