@@ -6,7 +6,7 @@
 
 void prompt_user(void)
 {
-	char *prompt = "ash$";
+	char *prompt = "(ash)$ ";
 	char *buffer = getcwd(NULL, 0);
 
 	if (isatty(STDIN_FILENO))
