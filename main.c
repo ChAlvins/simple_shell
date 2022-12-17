@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <signal.h>
 
 static volatile int keepRunning = 1;
 /**
@@ -13,6 +14,7 @@ void handle_signal(int signal)
 	write(STDOUT_FILENO, prompt, _strlen(prompt));
 	keepRunning = 0;
 	fflush(stdout);
+}
 /**
  * main - creates a prompt reading input, sparses it, executes and waits
  * for another command unless told to exit
