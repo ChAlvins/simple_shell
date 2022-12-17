@@ -6,7 +6,6 @@
 void print_env(char **env)
 {
 	int x = 0;
-	char **env = environ;
 	
 	while (env[x])
 	{
