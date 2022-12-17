@@ -12,9 +12,10 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 	char *line = NULL;
 	char **args, **path;
 	int count = 0, status = 0;
+	static volatile int keepRunning = 1;
 	(void) av;
 	signal(SIGINT, handle_signal);
-	while (1)
+	while (keepRunning)
 	{	/*printing prompt*/
 		prompt_user();
 		/*read input and return string*/
