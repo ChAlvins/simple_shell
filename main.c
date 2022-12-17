@@ -9,7 +9,7 @@
  */
 int main(int ac __attribute__((unused)), char **av, char **env)
 {
-	char *line;
+	char *line = NULL;
 	char **args, **path;
 	int count = 0, status = 0;
 	(void) av;
@@ -19,21 +19,26 @@ int main(int ac __attribute__((unused)), char **av, char **env)
 		prompt_user();
 		/*read input and return string*/
 		line = read_input();
+		if (line == NULL)
+			write(1, "", 0);
 		/*separates string to get command and arguments*/
-		args = sparse_str(line, env);
-
-		if ((_strcmp(args[0], "\n") != 0) && (_strcmp(args[0], "env") != 0))
-		{
-			count += 1;
-			path = search_path(env); /*search for PATH in env var*/
-			status = _stat(args, path);
-			child_process(av, args, env, status, count);
-		}
 		else
 		{
-			free(args);
+			args = sparse_str(line, env);
+
+			if ((_strcmp(args[0], "\n") != 0) && (_strcmp(args[0], "env") != 0))
+			{
+				count += 1;
+				path = search_path(env); /*search for PATH in env var*/
+				status = _stat(args, path);
+				child_process(av, args, env, status, count);
+			}
+			else
+			{
+				free(args);
+			}
+			free(line);
 		}
-		free(line);
 	}
 	return (0);
 }
