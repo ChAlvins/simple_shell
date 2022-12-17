@@ -3,7 +3,7 @@
  * print_env - prints the environment string to stdout
  * Return: Always 0
  */
-void print_env(void)
+void print_env(char **env)
 {
 	int x = 0;
 	char **env = environ;
